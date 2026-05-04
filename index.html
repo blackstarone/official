@@ -1,0 +1,39 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+let redirected = false;
+
+const fallback = setTimeout(() => {
+    if (!redirected) {
+        redirected = true;
+        window.location.href = "https://blackstarhub.blogspot.com/";
+    }
+}, 1500);
+
+// geo detect
+fetch("https://ipapi.co/json/")
+.then(res => res.json())
+.then(data => {
+
+    if (redirected) return;
+
+    let url = "https://blackstarhub.blogspot.com/";
+
+    if (data.country === "US") {
+        url = "https://blackstarhub.blogspot.com/";
+    }
+
+    redirected = true;
+    clearTimeout(fallback);
+    window.location.href = url;
+})
+.catch(() => {
+
+});
+</script>
+</head>
+<body></body>
+</html>
